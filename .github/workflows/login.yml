@@ -1,0 +1,24 @@
+name: Adrenalin Login
+on:
+  schedule: [{ cron: "0 9 * * 1-6" }]
+  workflow_dispatch:
+jobs:
+  Login:
+    timeout-minutes: 2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm install -g yarn && yarn
+      - name: Install Playwright Browsers
+        run: yarn playwright install --with-deps
+      - name: create env
+        run: |
+          touch .env
+          echo USER_ID=${{ secrets.USER_ID }} >> .env
+          echo PASSWD=${{ secrets.PASSWD }} >> .env
+      - name: Login
+        run: yarn login-adrenalin
