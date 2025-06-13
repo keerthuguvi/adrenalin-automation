@@ -6,7 +6,11 @@ jobs:
   Login:
     timeout-minutes: 2
     runs-on: ubuntu-latest
+    env:
+      TZ: "Asia/Kolkata"
     steps:
+      - name: Check Timezone
+        run: date
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:

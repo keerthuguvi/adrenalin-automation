@@ -1,12 +1,16 @@
 name: Adrenalin Logout
 on:
-  schedule: [{ cron: "0 19 * * 1-6" }]
+  schedule: [{ cron: "0 20 * * 1-6" }]
   workflow_dispatch:
 jobs:
   Logout:
     timeout-minutes: 2
     runs-on: ubuntu-latest
+    env:
+      TZ: "Asia/Kolkata"
     steps:
+      - name: Check Timezone
+        run: date
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
