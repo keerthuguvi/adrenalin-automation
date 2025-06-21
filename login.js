@@ -1,13 +1,21 @@
-require('dotenv').config()
+require('dotenv').config();
 
 const { chromium } = require('playwright');
 
 const userId = process.env.USER_ID;
 const passwd = process.env.PASSWD;
 
+const today = new Date();
+
+if (today.getDay() === 6) {
+    if (Math.ceil(today.getDate() / 7) % 2 === 0) {
+        console.log('Skipping script on even Saturday.');
+        process.exit(0);
+    }
+}
+
 (async () => {
     try {
-        console.log('Logging in: ', userId);
         const browser = await chromium.launch({ headless: true });
 
         const page = await browser.newPage();
