@@ -24,5 +24,5 @@ jobs:
           touch .env
           echo USER_ID=${{ secrets.USER_ID }} >> .env
           echo PASSWD=${{ secrets.PASSWD }} >> .env
-      - name: Login
+      - name: Logout
         run: yarn logout-adrenalin
